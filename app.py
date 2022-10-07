@@ -17,6 +17,8 @@ def add_client():
     if(type(results) == list):
         results_json = json.dumps(results, default=str)
         return results_json
+    elif(results.startswith('Duplicate entry')):
+        return "This username already exists. Please, pick other."
     else:
         return "Sorry."
 
