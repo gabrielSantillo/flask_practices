@@ -32,8 +32,11 @@ def change_password():
     [request.json.get('username'), request.json.get('old_password'), request.json.get('new_password')])
 
     if(type(results) == list):
-        results_json = json.dumps(results, default=str)
-        return results_json
+        if(len(results) == 1)
+            results_json = json.dumps(results, default=str)
+            return results_json
+        else:
+            return "Sorry, password did not match."
     else:
         return "Sorry."
 
