@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, make_response, jsonify
 from dbhelpers import run_statement
 import json
 from apihelpers import check_endpoint_info
@@ -15,12 +15,11 @@ def add_client():
     [request.json.get('username'), request.json.get('password'), request.json.get('is_premium')])
 
     if(type(results) == list):
-        results_json = json.dumps(results, default=str)
-        return results_json
+        return make_response(jsonify(results), 201)
     elif(results.startswith('Duplicate entry')):
         return "This username already exists. Please, pick other."
     else:
-        return "Sorry."
+        return make_response(jsonify(results), 400)
 
 @app.patch('/api/client')
 def change_password():
@@ -33,12 +32,11 @@ def change_password():
 
     if(type(results) == list):
         if(len(results) == 1):
-            results_json = json.dumps(results, default=str)
-            return results_json
+            return make_response(jsonify(results), 200)
         else:
-            return "Sorry, password did not match."
+            return make_response(jsonify("Invalid password"), 401)
     else:
-        return "Sorry."
+        return make_response(jsonify(results), 400)
 
 
 app.run(debug=True)
