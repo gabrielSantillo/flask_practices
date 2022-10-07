@@ -9,7 +9,7 @@ app = Flask(__name__)
 def add_client():
     invalid = check_endpoint_info(request.json, ['username', 'password', 'is_premium'])
     if(invalid != None):
-        return invalid
+        return make_response(jsonify(invalid), 400) 
 
     results = run_statement('CALL insert_client(?,?,?)',
     [request.json.get('username'), request.json.get('password'), request.json.get('is_premium')])
@@ -25,7 +25,7 @@ def add_client():
 def change_password():
     invalid = check_endpoint_info(request.json, ['username', 'old_password', 'new_password'])
     if(invalid != None):
-        return invalid
+        return make_response(jsonify(invalid), 400) 
 
     results = run_statement('CALL change_password(?,?,?)',
     [request.json.get('username'), request.json.get('old_password'), request.json.get('new_password')])
