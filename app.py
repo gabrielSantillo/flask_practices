@@ -32,7 +32,7 @@ def change_password():
     [request.json.get('username'), request.json.get('old_password'), request.json.get('new_password')])
 
     if(type(results) == list):
-        if(len(results) == 1)
+        if(len(results) == 1):
             results_json = json.dumps(results, default=str)
             return results_json
         else:
