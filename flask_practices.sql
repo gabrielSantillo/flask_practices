@@ -30,7 +30,7 @@ CREATE TABLE `client` (
   `is_premium` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `client_un` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,9 +64,9 @@ begin
 	update client c
 	set c.password = new_password_input
 	where c.username = username_input and c.password = old_password_input;
-	select c.id, c.username, c.password  
+	select c.id  
 	from client c 
-	where c.username = username_input;
+	where c.password = new_password_input;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -109,4 +109,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-06 19:31:32
+-- Dump completed on 2022-10-06 19:47:12
